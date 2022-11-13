@@ -1,0 +1,84 @@
+:root{
+  --Bg--Color: #eef;
+  --Nav-Font-Size:1.25rem;
+  --nav-bg:#7FB77E;
+}
+a{
+  text-decoration: none;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.nav_container{
+  width: 100%;
+  height: 80px;
+  background-color:var(--nav-bg);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0px 20px;
+  box-shadow: 0 5px 5px gray;
+}
+.nav_container > a.data_link{
+  font-size: var(--Nav-Font-Size);
+  padding: 10px 20px;
+  border-radius: 50px;
+  background-color: var(--Bg--Color);
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left:1vh;
+  border-radius: 1.5vh;
+  box-shadow: 1px 1px 3px gray;
+}
+.App{
+  height: calc( 100vh - 80px);
+  width: 100%;
+  background-color: var(--Bg--Color);
+}
+.main{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  /* background: linear-gradient(to bottom right, black 50%, palegoldenrod 50%); */
+}
+.main .photobox{
+  width: 100%;
+  height: 30%;
+  background-color: var(--nav-bg);
+  box-shadow: 5px 5px 5px gray;
+  border-radius: 1vw;
+}
+.main .textbox{
+  margin-top: 10%;
+  width: 100%;
+  height: 50%;
+  display: flex;
+}
+.main .textbox > .text{
+  width:30%;
+  height: 100%;
+  margin-left: 3%;
+  background-color: var(--nav-bg);
+  border-radius: 1vw;
+  padding: 10px;
+}
+.main .textbox > .text > .main-img{
+  width: 100%;
+  height: 80%;
+}
+.main .textbox > .text > p{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/**/
