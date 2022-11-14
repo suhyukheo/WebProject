@@ -14,24 +14,24 @@ export default class Main{
             </div> `
   }
   EVENT(){
-    let d =  ['가지', '고추', '오크라', '토마토', '풋콩', '피망']
-    let newd=[]
-      for(let i in  d){
-        setTimeout(()=>{
-          fetch(`http://openapi.foodsafetykorea.go.kr/api/f26d6b1de5e446268b4a/COOKRCP01/json/1/3/RCP_PARTS_DTLS=${d[i]}`)
-          .then((res) => {
-            return res.json(); //Promise 반환
-          }).then((json)=>{
-            let racipe = json.COOKRCP01
-            let num= racipe.total_count
-            if(num >0){
-              newd.push(d[i])
-            }
-            console.log(newd)
-            console.log(d)
-          })
-        },1000*i)
-      }
+    // let d =  ['가지', '고추', '오크라', '토마토', '풋콩', '피망']
+    // let newd=[]
+    //   for(let i in  d){
+    //     setTimeout(()=>{
+    //       fetch(`http://openapi.foodsafetykorea.go.kr/api/f26d6b1de5e446268b4a/COOKRCP01/json/1/3/RCP_PARTS_DTLS=${d[i]}`)
+    //       .then((res) => {
+    //         return res.json(); //Promise 반환
+    //       }).then((json)=>{
+    //         let racipe = json.COOKRCP01
+    //         let num= racipe.total_count
+    //         if(num >0){
+    //           newd.push(d[i])
+    //         }
+    //         console.log(newd)
+    //         console.log(d)
+    //       })
+    //     },1000*i)
+    //   }
       // .then((json)=>{
       //   let a =  json.COOKRCP01.row
       //   console.log(a)
