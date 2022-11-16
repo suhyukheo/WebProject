@@ -4,7 +4,6 @@ import Storage from "./pages/Storage.js"
 //라우팅 함수
 const container = document.querySelector('.App')
 const BASE_URL =document.location.origin
-console.log(BASE_URL)
 const router = async () =>{
   //현재 페이지가 가지고 있는 주소 및 보여줄 친구들
   const routes = [

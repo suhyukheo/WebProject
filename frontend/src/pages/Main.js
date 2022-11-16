@@ -3,17 +3,17 @@ export default class Main{
   }
   HTML(){
     return `<div class= 'main'>
-              <div class='photobox'>
-              </div>
-              <div class='textbox'>
-               <div class='text'>
-               </div>
-               <div class='text'></div>
-               <div class='text'></div>
-              </div>
-            </div> `
+    </div> `
   }
   EVENT(){
+    /**  // <div class='photobox'>
+              // </div>
+              // <div class='textbox'>
+              //  <div class='text'>
+              //  </div>
+              //  <div class='text'></div>
+              //  <div class='text'></div>
+              // </div> */
     // let d =  ['가지', '고추', '오크라', '토마토', '풋콩', '피망']
     // let newd=[]
     //   for(let i in  d){
