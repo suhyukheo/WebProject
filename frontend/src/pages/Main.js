@@ -9,7 +9,7 @@ export default class Main{
     let randombackground = () =>{
       let main = document.querySelector('.main')
       let random = parseInt(Math.random()*4)+1
-      main.style.backgroundImage = `url(../src/background/background_img${random}.jpg)`
+      main.style.backgroundImage = `url('../public/background/background_img${random}.jpg')`
     }
     let main_start_event = () =>{
       randombackground()

@@ -63,7 +63,7 @@ a{
  
 /*main*/
 .main{
-  background-image: url("../src/background/background_img1.jpg");
+  background-image: url("../public/background/background_img1.jpg");
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -158,7 +158,7 @@ a{
   flex-direction: column;
   .search_box{
     width: 100%;
-    height: 400px;
+    min-height: 400px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -176,7 +176,7 @@ a{
       color: white;
       border-bottom: 1px solid black;
     }
-    background: url('../src/background/background_img1.jpg');
+    background: url('../public/background/background_img1.jpg');
     .search_box_input{
       width: 30%;
       height: 50px;
@@ -216,15 +216,72 @@ a{
       display: flex;
       flex-direction: column;
       align-items: center;
+      h1{
+        margin: 2.5vh 50px;
+      }
+      .search_box2_tag{
+        width: 1250px;
+        .tag_bar{
+          width: 100%;
+          height: 75px;
+          background-color: rgb(240, 240, 240);
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          margin: 2.5vh 0 0 0;
+          .tag{
+            width: 100px;
+            height: 50px;
+            margin-left: 25px;
+            border-radius: 50px;
+            background-color: white;
+            border: 2px solid gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .tag:hover{
+            transition: all 0.35s;
+            background-color: black;
+            color: #eee;
+          }
+        }
+        .sub_tag_bar{
+          width: 100%;
+          height: auto;
+          display: flex;
+          flex-wrap: wrap;
+          padding: 25px;
+          .sub_tag{
+            font-size: 12px;
+            width: 75px;
+            height: 32.5px;
+            margin-left: 25px;
+            margin-bottom: 25px;
+            border-radius: 50px;
+            background-color: white;
+            border: 2px solid gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+          }
+          .sub_tag:hover{
+            border: none;
+          }
+        }
+        .tag_container{
+          width: 100%;
+          height: 30vh;
+          background-color: whitesmoke;
+        }
+      }
       .search_container{
         width: 1250px;
         display: flex;
         flex-direction: column;
         align-items:flex-start;
         overflow: hidden;
-        h1{
-          margin: 2.5vh 50px;
-        }
         .content_stage{
           position: relative;
           margin: 2.5vh 0;
@@ -240,7 +297,7 @@ a{
             transition: all 0.35s;
             z-index: 100;
             position: absolute;
-            left:50px;
+            left:0px;
             bottom: 100px;
             width: 50px;
             height: 50px;
@@ -282,7 +339,7 @@ a{
             flex-direction: column;
             background-color: #eee;
             font-size: 1rem;
-            margin-left: 50px;
+            margin: 0 25px;
           }
           img{
             width: 180px;

@@ -4,6 +4,7 @@ const path = require('path')
 
 
 app.use("/src",express.static(path.resolve(__dirname,"frontend","src")))
+app.use("/public",express.static(path.resolve(__dirname,"frontend","public")))
 
 app.get('/', function(req,res) { 
   res.sendFile(path.resolve("frontend",'index.html'))
