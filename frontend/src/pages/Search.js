@@ -115,6 +115,7 @@ export default class Search{
 
             //버튼이벤트에 레시피 총 갯수 넘기기 
             button_event(10)
+            contnent_click_event()
           })
         }
       }
@@ -157,6 +158,15 @@ export default class Search{
           container.style.transform=`translateX(${content_pos}px)`
         }
       })
+    }
+
+    let contnent_click_event = () =>{
+      let container = document.querySelectorAll('.content')
+      for(let i=0 ; i< container.length ;i++){
+        container[i].addEventListener('click',()=>{
+          console.log(i)
+        })
+      }
     }
     
 
