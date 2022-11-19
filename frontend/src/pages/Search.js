@@ -114,7 +114,7 @@ export default class Search{
               }
               container.innerHTML=contents
               //버튼이벤트에 레시피 총 갯수 넘기기
-              button_event(json.COOKRCP01.total_count)
+              search_button_event(json.COOKRCP01.total_count)
               contnent_click_event()
             }) 
          }
@@ -133,14 +133,14 @@ export default class Search{
             }
             container.innerHTML=contents
             //버튼이벤트에 레시피 총 갯수 넘기기 
-            button_event(10)
+            search_button_event(10)
           })
         }
       }
     
 
-    //container에 붙은 버튼 이벤트
-    let button_event = (total) =>{
+    //<-  , -> 버튼 이벤트
+    let search_button_event = (total) =>{
       let count = 0
       let content_pos = 0
       let btn_l = document.querySelector('#content_stage_btn_l')
@@ -179,22 +179,58 @@ export default class Search{
       })
     }
     
-    /**만들거 : 서브버튼마다 태그 컨테이너로 이동후 검색되는 시스템을 만들어야함 */
+    /**태그 만들기 서브 태그만들기 서브태그에 이벤트 추가. */
     let tag_event = () =>{
       let tag_bar = document.querySelectorAll('.tag_bar .tag')
       let sub_tag_bar = document.querySelector('.sub_tag_bar')
-      for(let i=0 ; i<tag_bar.length ;i++){
-        tag_bar[i].addEventListener('click',(e)=>{
-          let tag_contents =''
-          for(let i=0;i<tag_array[`${e.currentTarget.dataset.id}`].length ;i++){
-            tag_contents +=`<div class='sub_tag'>${tag_array[`${e.currentTarget.dataset.id}`][i]}</div>`
-          }
-          sub_tag_bar.innerHTML=''
-          sub_tag_bar.innerHTML = tag_contents
-        })
+      let tag_container =document.querySelector('.tag_container')
+      let append_sub_tag =() =>{
+        for(let i=0 ; i<tag_bar.length ;i++){
+          tag_bar[i].addEventListener('click',(e)=>{
+            let tag_contents =''
+            for(let i=0;i<tag_array[`${e.currentTarget.dataset.id}`].length ;i++){
+              tag_contents +=`<div class='sub_tag'>${tag_array[`${e.currentTarget.dataset.id}`][i]}</div>`
+            }
+            sub_tag_bar.innerHTML=''
+            sub_tag_bar.innerHTML = tag_contents
+            sub_tag_click_event_move_to_tag_container()
+          })
+        }
       }
-      
-    } 
+      let sub_tag_click_event_move_to_tag_container = () =>{
+        let sub_tags = document.querySelectorAll('.sub_tag')
+        for(let i=0; i< sub_tags.length ;i++){
+          sub_tags[i].addEventListener('click',(e)=>{
+            if(tag_container.childElementCount <=5){
+              if(!tag_container.innerText.includes(e.currentTarget.innerText)){
+                tag_container.innerHTML += `<div class='tag_container_tag'><p>${e.currentTarget.innerText}</p><i class="fa-solid fa-xmark"></i></div>`
+              }
+            }
+            tag_container_tag_remove_event()
+          })
+        }
+      }
+      let tag_container_tag_remove_event = () =>{
+        let tag_container =document.querySelector('.tag_container')
+        let tag_container_tags = [...tag_container.children]
+        let tag_container_html = ''
+        for(let i=0; i< tag_container_tags.length ;i++){
+          tag_container_tags[i].addEventListener('click',(e)=>{
+            if(e.target.parentNode ==e.currentTarget){
+               tag_container_tags.splice(tag_container_tags.indexOf(e.currentTarget),1)
+            tag_container.innerHTML =''
+            tag_container_html =''
+            for(let i=0 ; i<tag_container_tags.length ; i++){
+              tag_container_html = tag_container_html+`${tag_container_tags[i].outerHTML}`
+            }
+            tag_container.innerHTML = tag_container_html
+            tag_container_tag_remove_event()
+            }
+          })
+        }
+      }
+      append_sub_tag()
+    }
     
     /**컨텐츠에 클릭이벤트 추가 */
     let contnent_click_event = () =>{
