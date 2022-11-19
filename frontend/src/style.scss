@@ -221,6 +221,14 @@ a{
       }
       .search_box2_tag{
         width: 1250px;
+        #tag_search_btn{
+          width: 100%;
+          height: 5vh;
+          background-color: #7FB77E;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
         .tag_bar{
           width: 100%;
           height: 75px;
@@ -275,10 +283,13 @@ a{
         }
         .tag_container{
           width: 100%;
-          height: 30vh;
+          height: 100px;
           background-color: whitesmoke;
           display: flex;
+          align-items: center;
+          justify-content: flex-start;
           flex-wrap: wrap;
+          padding: 20px;
           .tag_container_tag{
             min-width: 100px;
             height: 50px;
@@ -299,6 +310,7 @@ a{
             padding-right: 10px;
           }
         }
+
       }
       .search_container{
         width: 1250px;

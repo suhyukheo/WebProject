@@ -19,10 +19,12 @@ export default class Search{
                    <button id='content_stage_btn_l' class='btn'><i class="fa-solid fa-arrow-left"></i></button>
                    <button id='content_stage_btn_r' class='btn'><i class="fa-solid fa-arrow-right" fa-1.5></i></button>
                    <div class='content_stage_container'>
+                   <a href="/" class="data_link">
                       <div class='content'>
                       <img src="../public/background/load_img.png" width:200px;>
                       <p>예시..</p>
                       </div>
+                  </a>
                       <div class='content'>
                       <img src="../public/background/load_img.png" width:200px;>
                       <p>예시..</p>
@@ -53,9 +55,8 @@ export default class Search{
                   </div>
                   <div class='sub_tag_bar'> </div>
                   <div class='tag_container'>
-
                   </div>
-
+                  <div id='tag_search_btn'>검색</div>
                  </div>
                  </div>
                </div>
@@ -84,8 +85,6 @@ export default class Search{
         }
       }
     })
-
-  
 
     
     //재료에 맞는 검색이벤트 
@@ -138,7 +137,6 @@ export default class Search{
         }
       }
     
-
     //<-  , -> 버튼 이벤트
     let search_button_event = (total) =>{
       let count = 0
@@ -179,6 +177,17 @@ export default class Search{
       })
     }
     
+    /**컨텐츠에 클릭이벤트 추가 */
+    let contnent_click_event = () =>{
+      let container = document.querySelectorAll('.content')
+      let search_box2 = document.querySelector('.search_box2')
+      for(let i=0 ; i< container.length ;i++){
+        container[i].addEventListener('click',()=>{
+          
+        })
+      }
+    }
+
     /**태그 만들기 서브 태그만들기 서브태그에 이벤트 추가. */
     let tag_event = () =>{
       let tag_bar = document.querySelectorAll('.tag_bar .tag')
@@ -229,18 +238,43 @@ export default class Search{
           })
         }
       }
-      append_sub_tag()
-    }
-    
-    /**컨텐츠에 클릭이벤트 추가 */
-    let contnent_click_event = () =>{
-      let container = document.querySelectorAll('.content')
-      let search_box2 = document.querySelector('.search_box2')
-      for(let i=0 ; i< container.length ;i++){
-        container[i].addEventListener('click',()=>{
-          
+      let tag_btn_search_event = () =>{
+        let tag_search_button = document.querySelector('#tag_search_btn')
+        tag_search_button.addEventListener('click',() => {
+          let tag_container_tags=document.querySelectorAll('.tag_container_tag p')
+            console.log(tag_container_tags)
+            fetch(`http://openapi.foodsafetykorea.go.kr/api/f26d6b1de5e446268b4a/COOKRCP01/json/1/100/RCP_PARTS_DTLS=${tag_container_tags[0].innerText}`)
+           .then((res) => {
+            return res.json(); //Promise 반환
+          }).then((json) => {
+            let racipes = json.COOKRCP01.row
+            let search_tags = []
+            for(let i of tag_container_tags){
+              search_tags.push(i.innerText)
+            }
+            let result=[]
+              for(let racipe of racipes){
+                let RCP_PARTS_DTLS =racipe['RCP_PARTS_DTLS']
+                let rcp =[]
+                for(let i of search_tags){
+                  if(RCP_PARTS_DTLS.includes(i)){
+                    rcp.push(1)
+                  }
+                  else{
+                    continue
+                  }
+                }
+                if(rcp.length == search_tags.length){
+                  result.push(racipe)
+                }
+            }
+            console.log(result)
+
+          }) 
         })
       }
+      append_sub_tag()
+      tag_btn_search_event()
     }
     
 

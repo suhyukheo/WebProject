@@ -10,6 +10,7 @@ const router = async () =>{
     { path : '/' , view:new Main()},
     { path : '/Search' , view: new Search()},
     { path : '/Storage' , view: new Storage()},
+    
   ]
 
   //map 은 어레이안에 요소를 연산후 어레이를 반환합니다. 굳이 안써도 되고 for문써도 됩니다.
