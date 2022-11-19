@@ -1,6 +1,7 @@
 import Search from "./pages/Search.js"
 import Main from "./pages/Main.js"
 import Storage from "./pages/Storage.js"
+import Detail from "./pages/Detaile.js"
 //라우팅 함수
 const container = document.querySelector('.App')
 const BASE_URL =document.location.origin
@@ -10,6 +11,7 @@ const router = async () =>{
     { path : '/' , view:new Main()},
     { path : '/Search' , view: new Search()},
     { path : '/Storage' , view: new Storage()},
+    { path : '/Detail', view: new Detail()}
     
   ]
 
@@ -48,6 +50,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
     if(e.target.classList.contains("data_link")){
       e.preventDefault()
       navigate(e.target.href)
+    }
+    else if(e.target.parentNode.classList.contains("data_link")){
+      e.preventDefault()
+      navigate(e.target.parentNode.href)
     }
   })
   router()

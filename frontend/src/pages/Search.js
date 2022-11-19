@@ -18,13 +18,11 @@ export default class Search{
                  <div class='content_stage'>
                    <button id='content_stage_btn_l' class='btn'><i class="fa-solid fa-arrow-left"></i></button>
                    <button id='content_stage_btn_r' class='btn'><i class="fa-solid fa-arrow-right" fa-1.5></i></button>
-                   <div class='content_stage_container'>
-                   <a href="/" class="data_link">
+                   <div class='content_stage_container'>        
                       <div class='content'>
                       <img src="../public/background/load_img.png" width:200px;>
                       <p>예시..</p>
                       </div>
-                  </a>
                       <div class='content'>
                       <img src="../public/background/load_img.png" width:200px;>
                       <p>예시..</p>
@@ -71,9 +69,9 @@ export default class Search{
 
     let search_input = document.querySelector('#search_input')
     let search_btn = document.querySelector('#btn')
+    let search_container_info = null
 
     /**input 태그의 이벤트 넣기*/
-
     search_input.addEventListener('input',()=>{
       let user_input = search_input.value
       let result=[]
@@ -86,6 +84,11 @@ export default class Search{
       }
     })
 
+    let local_save_info = (info) =>{
+        let new_info = JSON.stringify(info)
+        localStorage.setItem('search_item',new_info)
+    }
+
     
     //재료에 맞는 검색이벤트 
     let search_event = (start = 0,end =1000, first=0) =>{
@@ -96,19 +99,28 @@ export default class Search{
             .then((res) => {
               return res.json(); //Promise 반환
             }).then((json) => {
-              let racipe = json.COOKRCP01.row
-              for(let i=0 ; i<racipe.length ; i++){
-                if(racipe[i].ATT_FILE_NO_MAIN !== ''){
-                  contents +=`<div class='content'>
-                  <img src="${racipe[i].ATT_FILE_NO_MAIN}" width:200px; alt='죄송합니다.'>
-                   <p>${racipe[i].RCP_NM}</p>
-                  </div>` 
+              let recipe = json.COOKRCP01.row
+              search_container_info = recipe
+              for(let i=0 ; i<recipe.length ; i++){
+                if(recipe[i].ATT_FILE_NO_MAIN !== ''){
+                  contents +=`
+                  <div class='content'>
+                  <a href="/Detail" class="data_link">
+                   <img src="${recipe[i].ATT_FILE_NO_MAIN}" width:200px; alt='${recipe[i].RCP_NM}'>
+                   <p>${recipe[i].RCP_NM}</p>
+                   </a>
+                  </div>
+                  ` 
                 }
                 else{
-                  contents +=`<div class='content'>
-                  <img src="${racipe[i].ATT_FILE_NO_MK}" width:200px; alt='죄송합니다.'>
-                   <p>${racipe[i].RCP_NM}</p>
-                  </div>` 
+                  contents +=`
+                  <div class='content'>
+                  <a href="/Detail" class="data_link">
+                   <img src="${recipe[i].ATT_FILE_NO_MAIN}" width:200px; alt='${recipe[i].RCP_NM}'>
+                   <p>${recipe[i].RCP_NM}</p>
+                   </a>
+                  </div>
+                  `
                 }
               }
               container.innerHTML=contents
@@ -122,17 +134,23 @@ export default class Search{
           .then((res) => {
             return res.json(); //Promise 반환
           }).then((json) => {
-            let racipe = json.COOKRCP01.row
-            console.log(racipe)
-            for(let i=0 ; i<racipe.length ; i++){
-              contents +=`<div class='content'>
-              <img src="${racipe[i].ATT_FILE_NO_MAIN}" width:200px;>
-               <p>${racipe[i].RCP_NM}</p>
-              </div>` 
+            let recipe = json.COOKRCP01.row
+            search_container_info = recipe
+            console.log(recipe)
+            for(let i=0 ; i<recipe.length ; i++){
+              contents +=`
+              <div class='content'>
+              <a href="/Detail" class="data_link">
+               <img src="${recipe[i].ATT_FILE_NO_MAIN}" width:200px; alt='${recipe[i].RCP_NM}'>
+               <p>${recipe[i].RCP_NM}</p>
+               </a>
+              </div>
+              ` 
             }
             container.innerHTML=contents
             //버튼이벤트에 레시피 총 갯수 넘기기 
             search_button_event(10)
+            contnent_click_event()
           })
         }
       }
@@ -180,10 +198,9 @@ export default class Search{
     /**컨텐츠에 클릭이벤트 추가 */
     let contnent_click_event = () =>{
       let container = document.querySelectorAll('.content')
-      let search_box2 = document.querySelector('.search_box2')
       for(let i=0 ; i< container.length ;i++){
         container[i].addEventListener('click',()=>{
-          
+          local_save_info(search_container_info[i])
         })
       }
     }
@@ -247,14 +264,14 @@ export default class Search{
            .then((res) => {
             return res.json(); //Promise 반환
           }).then((json) => {
-            let racipes = json.COOKRCP01.row
+            let recipes = json.COOKRCP01.row
             let search_tags = []
             for(let i of tag_container_tags){
               search_tags.push(i.innerText)
             }
             let result=[]
-              for(let racipe of racipes){
-                let RCP_PARTS_DTLS =racipe['RCP_PARTS_DTLS']
+              for(let recipe of recipes){
+                let RCP_PARTS_DTLS =recipe['RCP_PARTS_DTLS']
                 let rcp =[]
                 for(let i of search_tags){
                   if(RCP_PARTS_DTLS.includes(i)){
@@ -265,11 +282,25 @@ export default class Search{
                   }
                 }
                 if(rcp.length == search_tags.length){
-                  result.push(racipe)
+                  result.push(recipe)
                 }
             }
-            console.log(result)
-
+            search_container_info = result
+            let container = document.querySelector('.content_stage_container')
+            let contaents =''
+            for(let recipe of result){
+              contaents+=`
+                  <div class='content'>
+                   <a href="/Detail" class="data_link">
+                   <img src="${recipe.ATT_FILE_NO_MAIN}" width:200px; alt='${recipe.RCP_NM}'>
+                   <p>${recipe.RCP_NM}</p>
+                   </a>
+                  </div>
+                  ` 
+            }
+            container.innerHTML =''
+            container.innerHTML = contaents
+            contnent_click_event()
           }) 
         })
       }
