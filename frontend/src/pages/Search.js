@@ -14,7 +14,7 @@ export default class Search{
                </div>
                <div class='search_box2'>
                <div class='search_container'>
-                 <h1>오늘의 추천 레시피</h1>
+                 <h1 id='search_title'>오늘의 추천 레시피</h1>
                  <div class='content_stage'>
                    <button id='content_stage_btn_l' class='btn'><i class="fa-solid fa-arrow-left"></i></button>
                    <button id='content_stage_btn_r' class='btn'><i class="fa-solid fa-arrow-right" fa-1.5></i></button>
@@ -94,6 +94,7 @@ export default class Search{
     let search_event = (start = 0,end =1000, first=0) =>{
       let contents =''
       let container = document.querySelector('.content_stage_container')
+      let search_title = document.querySelector('#search_title')
       if((search_input.value !== '')){
         fetch(`http://openapi.foodsafetykorea.go.kr/api/f26d6b1de5e446268b4a/COOKRCP01/json/${start}/${end}/RCP_PARTS_DTLS=${search_input.value}`)
             .then((res) => {
@@ -101,6 +102,7 @@ export default class Search{
             }).then((json) => {
               let recipe = json.COOKRCP01.row
               search_container_info = recipe
+              search_title.innerText = search_input.value + ' 관련 레시피'
               for(let i=0 ; i<recipe.length ; i++){
                 if(recipe[i].ATT_FILE_NO_MAIN !== ''){
                   contents +=`
@@ -136,6 +138,7 @@ export default class Search{
           }).then((json) => {
             let recipe = json.COOKRCP01.row
             search_container_info = recipe
+            search_title.innerText = '오늘의 추천 레시피'
             console.log(recipe)
             for(let i=0 ; i<recipe.length ; i++){
               contents +=`
@@ -258,8 +261,19 @@ export default class Search{
       let tag_btn_search_event = () =>{
         let tag_search_button = document.querySelector('#tag_search_btn')
         tag_search_button.addEventListener('click',() => {
+          let search_title = document.querySelector('#search_title')
           let tag_container_tags=document.querySelectorAll('.tag_container_tag p')
+          let tag_title =''
             console.log(tag_container_tags)
+            for(let i=0; i<tag_container_tags.length ;i++){
+              if(i==tag_container_tags.length-1){
+                tag_title +=`${tag_container_tags[i].innerText} 관련 레시피`
+              }
+              else{
+                tag_title +=`${tag_container_tags[i].innerText},`
+              }
+            }
+            search_title.innerText = tag_title
             fetch(`http://openapi.foodsafetykorea.go.kr/api/f26d6b1de5e446268b4a/COOKRCP01/json/1/100/RCP_PARTS_DTLS=${tag_container_tags[0].innerText}`)
            .then((res) => {
             return res.json(); //Promise 반환
@@ -312,6 +326,8 @@ export default class Search{
     //시작할때 이벤트
     let start_event = () =>{
       let random_start = parseInt(Math.random()*990)
+      let nav = document.querySelector('.nav_container')
+      nav.style.background='none'
       search_event(random_start,random_start+10,1)
        //검색창 버튼에 검색이벤트 , 엔터이벤트 추가 
       search_btn.addEventListener('click',()=>{

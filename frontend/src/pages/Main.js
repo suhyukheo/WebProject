@@ -12,6 +12,8 @@ export default class Main{
       main.style.backgroundImage = `url('../public/background/background_img${random}.jpg')`
     }
     let main_start_event = () =>{
+      let nav = document.querySelector('.nav_container')
+      nav.style.background='none'
       randombackground()
     }
     main_start_event()
