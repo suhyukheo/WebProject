@@ -124,45 +124,140 @@ a {
 .storage {
   width: 100%;
   height: 100%;
-  padding: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding-top: 90px;
+  background-color: #eee;
 }
-.storage .storage_box {
-  width: 47.5%;
-  height: 100%;
-  padding: 1vw;
-  display: flex;
-  background-color: var(--nav-bg);
-  border-radius: 1vw;
-}
-.storage .storage_box input {
-  width: 200px;
-  height: 50px;
-  font-size: 1rem;
-}
-.storage .storage_box #btn {
-  width: 50px;
-  height: 50px;
-  font-size: 1rem;
-}
-.storage .storage_box .content {
+.storage .storage_container {
   width: 100%;
-  min-height: 100px;
-  background-color: var(--Bg--Color);
-  margin-bottom: 1vw;
-  border-radius: 1vh;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.storage .storage_container .storage_left {
+  width: 600px;
+  height: calc(100vh - 180px);
+  margin-right: 50px;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px gray;
+  background-color: white;
+}
+.storage .storage_container .storage_left .user_ingredient {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.storage .storage_container .storage_left .user_ingredient .ingredient {
+  width: 100%;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 5px 20px;
+  background-color: #eee;
+  margin-bottom: 25px;
+  border-radius: 25px;
 }
-.storage .content_box {
+.storage .storage_container .storage_left .user_ingredient .ingredient p {
+  font-size: 1.25rem;
+}
+.storage .storage_container .storage_left .user_ingredient .ingredient button {
+  width: 50px;
+  height: 30px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+.storage .storage_container .storage_right {
+  width: 600px;
+  height: calc(100vh - 180px);
+  padding: 10px;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 5px 5px 5px gray;
+}
+.storage .storage_container .storage_right .storage_user_input_box {
+  position: relative;
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  overflow-wrap: normal;
+  justify-content: center;
+  align-items: center;
+}
+.storage .storage_container .storage_right .storage_user_input_box img {
+  width: 100%;
+  height: 300px;
+  background-color: #eee;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+.storage .storage_container .storage_right .storage_user_input_box .storage_user_input_and_btn {
+  position: relative;
+  width: 500px;
+  height: 50px;
+}
+.storage .storage_container .storage_right .storage_user_input_box .storage_user_input_and_btn input {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  font-size: 1.25rem;
+  padding: 0 10px;
+}
+.storage .storage_container .storage_right .storage_user_input_box .storage_user_input_and_btn button {
+  position: absolute;
+  right: 0px;
+  width: 50px;
+  height: 50px;
+  background-color: #eee;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.storage .storage_container .storage_right .storage_user_input_box .storage_user_input_and_btn .relation_tag_box {
+  position: absolute;
+  bottom: -110px;
+  width: 100%;
+  height: 100px;
+  background-color: rgb(253, 253, 253);
+  border-radius: 20px;
+  padding: 10px;
   overflow-y: auto;
+  overflow-x: hidden;
+  display: none;
+}
+.storage .storage_container .storage_right .storage_user_input_box .storage_user_input_and_btn .relation_tag_box .relation_tag {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 0px 10px;
+}
+.storage .storage_container .storage_right .storage_user_input_box .storage_user_input_and_btn .relation_tag_box .relation_tag:hover {
+  background-color: #eee;
+}
+.storage .storage_container .storage_right .storage_user_input_box .storage_user_input_and_btn .onoff {
+  display: block;
+}
+.storage .storage_container .storage_right .storage_tag_container {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  overflow: auto;
+}
+.storage .storage_container .storage_right .storage_tag_container .tag {
+  min-width: 75px;
+  padding: 10px;
+  height: 40px;
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
 
 /*search*/
@@ -490,6 +585,7 @@ a {
   box-shadow: 2px 2px 5px gray;
   padding: 10px;
   background-color: white;
+  overflow: auto;
 }
 .detail .detaile_container .recipe_right_box h2 {
   margin: 25px 0px;
@@ -506,4 +602,5 @@ a {
 .detail .detaile_container .recipe_right_box .nutrition_box {
   width: 100%;
   background-color: #eee;
+  margin-bottom: 50px;
 }/*# sourceMappingURL=style.css.map */

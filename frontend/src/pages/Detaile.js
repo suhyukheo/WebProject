@@ -20,7 +20,7 @@ export default class Detail{
        <div class='ingredient_box'></div>
        <h2>영양정보</h2>
        <div class='nutrition_box'></div>
-       <div class=''></div>
+  
        </div>
        </div>
       </div>
@@ -59,10 +59,8 @@ export default class Detail{
       for(let i=1 ; i<21 ;i++){
         i=String(i)
         i=i.padStart(2,'0');
-        console.log(i , typeof(i))
         let MANUALi='MANUAL'+i
         let MANUALimgi= 'MANUAL_IMG'+i
-        console.log(MANUALi)
         if(recipe[MANUALi] !==''){
           contents +=`<div class='recipe'><img src='${recipe[MANUALimgi]}' ><p>${recipe[MANUALi]}</p></div>`
         }
@@ -87,7 +85,7 @@ export default class Detail{
       <div><p>단백질: ${recipe['INFO_PRO']}g</p></div>
       <div><p>지방: ${recipe['INFO_FAT']}g</p></div>
       <div><p>나트륨: ${recipe['INFO_NA']}g</p></div>
-      `     
+      ` 
     }
     let detail_start_event = () =>{
       let nav = document.querySelector('.nav_container')

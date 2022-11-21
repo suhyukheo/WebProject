@@ -123,46 +123,142 @@ a{
  .storage{
   width: 100%;
   height: 100%;
-  padding: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  .storage_box{
-    width: 47.5%;
+  padding-top: 90px;
+  background-color: #eee;
+  .storage_container{
+    width: 100%;
     height: 100%;
-    padding: 1vw;
     display: flex;
-    background-color: var(--nav-bg);
-    border-radius: 1vw;
-    input{
-      width: 200px;
-      height: 50px;
-      font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+    .storage_left{
+      width: 600px;
+      height: calc( 100vh - 180px);
+      margin-right: 50px;
+      padding: 10px;
+      border-radius: 20px;
+      box-shadow: 2px 2px 5px gray;
+      background-color: white;
+      .user_ingredient{
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        .ingredient{
+          width: 100%;
+          height: 80px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 5px 20px;
+          background-color: #eee;
+          margin-bottom: 25px;
+          border-radius: 25px;
+          p{
+            font-size: 1.25rem;
+          }
+          button{
+            width: 50px;
+            height: 30px;
+            border: 2px solid black;
+            border-radius: 5px;
+            background-color: white;
+          }
+        }
+      }
     }
-    #btn{
-      width: 50px;
-      height: 50px;
-      font-size: 1rem;
+    .storage_right{
+      width: 600px;
+      height: calc( 100vh - 180px);
+      padding: 10px;
+      border-radius: 20px;
+      background-color: white;
+      box-shadow: 5px 5px 5px gray;
+      .storage_user_input_box{
+        position: relative;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        img{
+          width: 100%;
+          height: 300px;
+          background-color: #eee;
+          border-radius: 10px;
+          margin-bottom: 25px;
+        }
+        .storage_user_input_and_btn{
+          position: relative;
+          width: 500px;
+          height: 50px; 
+          input{
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            padding: 0 10px;
+          }
+          button{
+            position: absolute;
+            right:0px;
+            width:50px;
+            height:50px;
+            background-color: #eee;
+            border-bottom-right-radius:10px;
+            border-top-right-radius: 10px;
+          }
+          .relation_tag_box{
+            position: absolute;
+            bottom: -110px;
+            width: 100%;
+            height: 100px;
+            background-color: rgb(253, 253, 253);
+            border-radius: 20px;
+            padding: 10px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: none;
+            .relation_tag{
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              width: 100%;
+              padding: 0px 10px;
+            }
+            .relation_tag:hover{
+              background-color: #eee;
+            }
+          }
+          .onoff{
+            display: block;
+          }
+        }
+      }
+      .storage_tag_container{
+        width: 100%;
+        height: 200px;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+        overflow: auto;
+        .tag{
+          min-width: 75px;
+          padding: 10px;
+          height: 40px;
+          border: 2px solid black;
+          background-color: white;
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 10px;
+        }
+      }
     }
-    .content{
-      width: 100%;
-      min-height: 100px;
-      background-color: var(--Bg--Color);
-      margin-bottom: 1vw;
-      border-radius: 1vh;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+
   }
-  .content_box{
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    overflow-wrap: normal;
-    overflow-y:auto;
-  }
-}
+ }
 
 
  /*search*/
@@ -513,6 +609,7 @@ a{
       .nutrition_box{
         width: 100%;
         background-color: #eee;
+        margin-bottom: 50px;
       }
     }
   } 

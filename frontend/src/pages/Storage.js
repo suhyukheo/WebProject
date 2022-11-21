@@ -1,4 +1,4 @@
-let main =document.querySelector('.App') 
+import SearchData from './SearchData.js';
 export default class Storage{
   constructor(){
   }
@@ -7,17 +7,68 @@ export default class Storage{
     // page.className='main dash'
     // page.innerText ='dash'
     return `<div class= 'storage'>
-              <div class='storage_box content_box'></div>
-              <div class='storage_box'>
-                <input></input>
-                <button id='btn'>click</button>
-              </div>          
+             <div class='storage_container'>
+              <div class='storage_left'>
+                <div class='user_ingredient'>
+                </div>
+              </div>
+               <div class='storage_right'>
+                 <div class='storage_user_input_box'>
+                   <img src='../public/background/storage.png'>
+                   <div class='storage_user_input_and_btn'>
+                   <input id='storage_input' placeholder="재료를 입력하세요" type="text" maxlength="15" autocomplete="off"><button id='storage_btn'><i class="fa-solid fa-check fa-1.5x"></i></button>
+                   <div class='relation_tag_box'></div>
+                   </div>
+                   <div class='storage_tag_container'></div>
+                 </div>
+               </div>
+             </div> 
             </div> `
   }
   EVENT(){
-    let storage_input =document.querySelector('.storage_box input') 
-    let storage_btn = document.querySelector('.storage_box #btn')
-    let content_box = document.querySelector('.storage_box.content_box')
+    let storage_input =document.querySelector('#storage_input') 
+    let storage_btn = document.querySelector('#storage_btn')
+    let content_box = document.querySelector('.user_ingredient')
+    let storage_tag_container = document.querySelector('.storage_tag_container')
+    let relation_tag_box = document.querySelector('.relation_tag_box')
+    const Data = new SearchData()
+    const tag_all = Data.all_tag
+    /**input에 들어갈 이벤트 현재 만드는거*/
+    let user_input_focus_event = () =>{
+       let storage_user_input_box = document.querySelector('.storage_user_input_and_btn')
+       let storage_user_input =document.querySelector('#storage_input')
+       let result = []
+       let contents =''
+       //여기부터 다시
+       storage_user_input.addEventListener('focus',()=>{
+         relation_tag_box.classList.add('onoff')
+         storage_user_input.addEventListener('input',()=>{
+          relation_tag_box.innerHTML =''
+          contents=''
+          result =[]
+          if(storage_user_input.value !==''){
+            for(let i=0; i<tag_all.length ; i++){
+              if(tag_all[i].includes(storage_user_input.value)){
+                result.push(tag_all[i])
+              }
+            }
+          }
+          for(let i=0 ; i<result.length ;i++){
+           contents +=`<div class='relation_tag'>${result[i]}</div>`
+          }
+          relation_tag_box.innerHTML = contents
+          let relation_tags = document.querySelectorAll('.relation_tag')
+          for(let i=0 ;i< relation_tags.length ;i++){
+            relation_tags[i].addEventListener('mouseover',()=>{
+              storage_user_input.value = relation_tags[i].innerText
+            })
+          }
+         })
+       })
+       storage_user_input.addEventListener('focusout',()=>{
+        relation_tag_box.classList.remove('onoff')
+       })
+    }
 
     /**페이지 로드시 첫 실행 유저데이터를*/
     let load_storage_items = () =>{
@@ -37,26 +88,30 @@ export default class Storage{
     /**받아온 유저 데이터를 기반으로 컨텐츠 박스에 컨텐츠를 추가한다. */
     let append_storage_items = (storage_list) =>{
       if(storage_list.length>0){
-        let contents ='' 
+        let contents =''
+        let tag_contents ='' 
         content_box.innerHTML = ''
         for(let i=0; i<storage_list.length;i++){
-          contents +=`<div class='content'><p>${storage_list[i].name}</p><button class='btn'>del</button></div>`
+          contents +=`<div class='ingredient'><p>${storage_list[i].name}</p><button class='btn'>del</button></div>`
+          tag_contents +=`<div class='tag'>${storage_list[i].name}</div>`
         }
         content_box.innerHTML=contents
+        storage_tag_container.innerHTML = tag_contents
         items_remove_event()
       }
       else{
         content_box.innerHTML=''
+        storage_tag_container.innerHTML =''
       }
     }
 
 
     /**추가된 컨텐츠의 삭제 버튼의 이벤트를 추가한다. */  
     let items_remove_event = () =>{
-      let contents_list = document.querySelectorAll('.storage_box.content_box  .content > .btn')
+      let contents_list = document.querySelectorAll('.ingredient button')
       for(let i= 0 ;i<contents_list.length ;i++){
           contents_list[i].addEventListener('click',()=>{
-          pop_user_data(i)
+          remove_user_data(i)
          })
       }
     }
@@ -66,15 +121,30 @@ export default class Storage{
     let  push_user_data = () =>{
       let user_storage = localStorage.getItem('user_storage')
       user_storage = JSON.parse(user_storage)
-      user_storage.push({'name':`${storage_input.value}`,'date':``,'type':``})
-      let new_user_stroge = JSON.stringify(user_storage)
-      localStorage.setItem('user_storage',new_user_stroge)
-      append_storage_items(user_storage)
+      let result = 0
+      /** 중복 입력 가능시
+       * user_storage.push({'name':`${storage_input.value}`,'date':``,'type':``})
+        let new_user_stroge = JSON.stringify(user_storage)
+        localStorage.setItem('user_storage',new_user_stroge)
+        append_storage_items(user_storage) 
+        */
+      //중복 입력 배제
+      for(let i=0; i<user_storage.length ;i++){
+        if(user_storage[i]['name'] === storage_input.value){
+          result = 1 
+        }
+      }
+      if(result===0){
+        user_storage.push({'name':`${storage_input.value}`,'date':``,'type':``})
+        let new_user_stroge = JSON.stringify(user_storage)
+        localStorage.setItem('user_storage',new_user_stroge)
+        append_storage_items(user_storage)
+      }
     }
 
 
     /**컨텐트 박스에 유저 데이터 제거 */
-    let pop_user_data = (i) =>{
+    let remove_user_data = (i) =>{
       let user_storage = localStorage.getItem('user_storage')
       user_storage = JSON.parse(user_storage)
       //splice('제거할 요소 위치','갯수')
@@ -82,15 +152,25 @@ export default class Storage{
       let new_user_stroge = JSON.stringify(user_storage)
       localStorage.setItem('user_storage',new_user_stroge)
       append_storage_items(user_storage)
-      
     }
     
 
-    /**로딩시 */
-    load_storage_items()
-    
-    storage_btn.addEventListener('click',()=>{
-      push_user_data()
-    })
+    /**로딩시 */ 
+    let storage_start = () =>{
+      load_storage_items()
+      let nav = document.querySelector('.nav_container')
+      nav.style.backgroundColor='#7FB77E'
+      storage_btn.addEventListener('click',()=>{
+        push_user_data()
+      })
+      storage_input.addEventListener('keydown',(event)=>{
+        if( event.keyCode == 13){
+          push_user_data()
+          relation_tag_box.classList.remove('onoff')
+        }
+      })
+      user_input_focus_event()
+    }
+    storage_start()
   }
 }
