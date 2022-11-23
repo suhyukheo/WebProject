@@ -53,6 +53,20 @@ a {
   justify-content: flex-start;
   color: white;
 }
+.nav_container .logo i {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav_container .logo h4 {
+  position: absolute;
+  left: 80px;
+  bottom: 17.5px;
+  font-size: 22.5px;
+}
 .nav_container .menu {
   width: auto;
   display: flex;
@@ -216,11 +230,12 @@ a {
 }
 .storage .storage_container .storage_right .storage_user_input_box .storage_user_input_and_btn .relation_tag_box {
   position: absolute;
-  bottom: -110px;
+  bottom: -185px;
   width: 100%;
-  height: 100px;
-  background-color: rgb(253, 253, 253);
-  border-radius: 20px;
+  height: 175px;
+  border: 5px solid #eee;
+  background-color: white;
+  border-radius: 10px;
   padding: 10px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -231,7 +246,8 @@ a {
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  padding: 0px 10px;
+  height: 25px;
+  background-color: white;
 }
 .storage .storage_container .storage_right .storage_user_input_box .storage_user_input_and_btn .relation_tag_box .relation_tag:hover {
   background-color: #eee;
@@ -322,6 +338,31 @@ a {
   border-radius: 10px;
   background-color: black;
   color: white;
+}
+.search .search_box .search_box_input .search_box_input_ingredient_box {
+  display: none;
+  position: absolute;
+  width: 100%;
+  bottom: -205px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid gray;
+  overflow: auto;
+  padding: 10px 10px;
+}
+.search .search_box .search_box_input .search_box_input_ingredient_box .ingredient {
+  height: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.search .search_box .search_box_input .search_box_input_ingredient_box .ingredient:hover {
+  background-color: #eee;
+}
+.search .search_box .search_box_input .onoff {
+  display: block;
 }
 .search .search_box2 {
   display: flex;
@@ -437,7 +478,7 @@ a {
 .search .search_box2 .search_container .content_stage .content_stage_container {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   overflow: visible;
   transition: all 0.5s;
 }
@@ -501,6 +542,14 @@ a {
   margin-top: 10px;
   width: 180px;
   color: black;
+}
+.search .search_box2 .search_container .content_stage .no_content {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee;
 }
 
 /*detail*/
@@ -594,13 +643,18 @@ a {
   width: 100%;
   height: auto;
   border-radius: 10px;
-  background-color: #eee;
+  background-color: white;
+  padding: 10px;
+  border: 2.5px solid black;
 }
 .detail .detaile_container .recipe_right_box .ingredient_box p {
   font-size: 1rem;
 }
 .detail .detaile_container .recipe_right_box .nutrition_box {
   width: 100%;
-  background-color: #eee;
+  background-color: white;
+  padding: 10px;
+  border: 2.5px solid black;
   margin-bottom: 50px;
+  border-radius: 10px;
 }/*# sourceMappingURL=style.css.map */

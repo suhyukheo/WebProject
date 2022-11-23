@@ -49,6 +49,20 @@ a{
     align-items: center;
     justify-content:flex-start;
     color: white;
+    i{
+      position: relative;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    h4{
+      position: absolute;
+      left: 80px;
+      bottom: 17.5px;
+      font-size:22.5px;
+    }
   }
   .menu{
     width: auto;
@@ -210,11 +224,12 @@ a{
           }
           .relation_tag_box{
             position: absolute;
-            bottom: -110px;
+            bottom: -185px;
             width: 100%;
-            height: 100px;
-            background-color: rgb(253, 253, 253);
-            border-radius: 20px;
+            height: 175px;
+            border: 5px solid #eee;
+            background-color: white;
+            border-radius: 10px;
             padding: 10px;
             overflow-y: auto;
             overflow-x: hidden;
@@ -224,7 +239,8 @@ a{
               align-items: center;
               justify-content: flex-start;
               width: 100%;
-              padding: 0px 10px;
+              height: 25px;
+              background-color: white;
             }
             .relation_tag:hover{
               background-color: #eee;
@@ -276,6 +292,7 @@ a{
     justify-content: center;
     background-position: center;
     background-size: contain;
+    background: url('../public/background/background_img1.jpg');
     h5{
       font-size: 5vw;
       color: #fff;
@@ -287,7 +304,6 @@ a{
       color: white;
       border-bottom: 1px solid black;
     }
-    background: url('../public/background/background_img1.jpg');
     .search_box_input{
       width: 30%;
       height: 50px;
@@ -320,6 +336,31 @@ a{
         border-radius: 10px;
         background-color: black;
         color: white;
+      }
+      .search_box_input_ingredient_box{
+        display: none;
+        position: absolute;
+        width: 100%;
+        bottom: -205px;
+        height: 200px;
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid gray;
+        overflow: auto;
+        padding: 10px 10px;
+        .ingredient{
+          height: 30px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .ingredient:hover{
+          background-color: #eee;
+        }
+      }
+      .onoff{
+        display: block;
       }
     }
     }
@@ -436,7 +477,7 @@ a{
           .content_stage_container{
             display: flex;
             justify-content: flex-start;
-            align-items: center;
+            align-items: flex-start;
             overflow:visible;
             transition: all 0.5s;
           }
@@ -500,6 +541,14 @@ a{
             margin-top: 10px;
             width: 180px;
             color: black;
+          }
+          .no_content{
+            height: 250px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eee
           }
         }
       } 
@@ -601,15 +650,20 @@ a{
         width: 100%;
         height: auto;
         border-radius: 10px;
-        background-color: #eee;
+        background-color: white;
+        padding: 10px;
+        border: 2.5px solid black;
         p{
           font-size: 1rem;
         }
       }
       .nutrition_box{
         width: 100%;
-        background-color: #eee;
+        background-color: white;
+        padding: 10px;
+        border: 2.5px solid black;
         margin-bottom: 50px;
+        border-radius: 10px;
       }
     }
   } 

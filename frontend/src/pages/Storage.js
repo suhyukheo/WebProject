@@ -35,7 +35,6 @@ export default class Storage{
     const tag_all = Data.all_tag
     /**input에 들어갈 이벤트 현재 만드는거*/
     let user_input_focus_event = () =>{
-       let storage_user_input_box = document.querySelector('.storage_user_input_and_btn')
        let storage_user_input =document.querySelector('#storage_input')
        let result = []
        let contents =''

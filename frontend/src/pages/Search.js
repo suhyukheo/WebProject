@@ -9,8 +9,10 @@ export default class Search{
                <div class='search_box_input'>
                <input id='search_input' type='text' placeholder='재료명 검색..' autocomplete='off'></input>
                <div class='icon' id='btn'><i class="fa-solid fa-magnifying-glass fa-1.5x"></i></div>
+               <div class='search_box_input_ingredient_box'>
                </div>
-               <p>태그 사용하기</p>
+               </div>
+               <p id='move_to_tag'>태그 사용하기</p>
                </div>
                <div class='search_box2'>
                <div class='search_container'>
@@ -42,7 +44,7 @@ export default class Search{
                    </div>
                  </div>
                  <h1>태그로 레시피 찾기</h1>
-                 <div class='search_box2_tag'>
+                 <div class='search_box2_tag' id='tag'>
                   <div class='tag_bar'>
                    <div class='tag' data-id='육류'>육류</div>
                    <div class='tag' data-id='해산물'>해산물</div>
@@ -72,17 +74,52 @@ export default class Search{
     let search_container_info = null
 
     /**input 태그의 이벤트 넣기*/
-    search_input.addEventListener('input',()=>{
-      let user_input = search_input.value
-      let result=[]
-      if(user_input !==''){
-        for(let i=0; i<tag_all.length ; i++){
-          if(tag_all[i].includes(user_input)){
-            result.push(tag_all[i])
-          }
-        }
-      }
-    })
+    let input_search_event = () =>{
+      let search_user_input =document.querySelector('#search_input')
+      let search_box_input_ingredient_box = document.querySelector('.search_box_input_ingredient_box')
+      let result = []
+      let contents =''
+      //여기부터 다시
+      search_user_input.addEventListener('focus',()=>{
+        search_box_input_ingredient_box.classList.add('onoff')
+        search_user_input.addEventListener('input',()=>{
+        search_box_input_ingredient_box.innerHTML =''
+         contents=''
+         result =[]
+         if(search_user_input.value !==''){
+           for(let i=0; i<tag_all.length ; i++){
+             if(tag_all[i].includes(search_user_input.value)){
+               result.push(tag_all[i])
+             }
+           }
+         }
+         for(let i=0 ; i<result.length ;i++){
+          contents +=`<div class='ingredient'>${result[i]}</div>`
+         }
+        search_box_input_ingredient_box.innerHTML = contents
+         let ingredient_tags = document.querySelectorAll('.ingredient')
+         for(let i=0 ;i< ingredient_tags.length ;i++){
+          ingredient_tags[i].addEventListener('mouseover',()=>{
+             search_user_input.value =ingredient_tags[i].innerText
+           })
+         }
+        })
+      })
+      search_user_input.addEventListener('focusout',()=>{
+      search_box_input_ingredient_box.classList.remove('onoff')
+      })
+    }
+    // search_input.addEventListener('input',()=>{
+    //   let user_input = search_input.value
+    //   let result=[]
+    //   if(user_input !==''){
+    //     for(let i=0; i<tag_all.length ; i++){
+    //       if(tag_all[i].includes(user_input)){
+    //         result.push(tag_all[i])
+    //       }
+    //     }
+    //   }
+    // })
 
     let local_save_info = (info) =>{
         let new_info = JSON.stringify(info)
@@ -95,6 +132,7 @@ export default class Search{
       let contents =''
       let container = document.querySelector('.content_stage_container')
       let search_title = document.querySelector('#search_title')
+      //벨류값이 없을 경우 거르기
       if((search_input.value !== '')){
         fetch(`http://openapi.foodsafetykorea.go.kr/api/f26d6b1de5e446268b4a/COOKRCP01/json/${start}/${end}/RCP_PARTS_DTLS=${search_input.value}`)
             .then((res) => {
@@ -103,35 +141,44 @@ export default class Search{
               let recipe = json.COOKRCP01.row
               search_container_info = recipe
               search_title.innerText = search_input.value + ' 관련 레시피'
-              for(let i=0 ; i<recipe.length ; i++){
-                if(recipe[i].ATT_FILE_NO_MAIN !== ''){
-                  contents +=`
-                  <div class='content'>
-                  <a href="/Detail" class="data_link">
-                   <img src="${recipe[i].ATT_FILE_NO_MAIN}" width:200px; alt='${recipe[i].RCP_NM}'>
-                   <p>${recipe[i].RCP_NM}</p>
-                   </a>
-                  </div>
-                  ` 
+              //레시피가 없을 경우 거르기
+              if(json.COOKRCP01.RESULT.CODE!='INFO-200'){
+                for(let i=0 ; i<recipe.length ; i++){
+                  if(recipe[i].ATT_FILE_NO_MAIN !== ''){
+                    contents +=`
+                    <div class='content'>
+                    <a href="/Detail" class="data_link">
+                     <img src="${recipe[i].ATT_FILE_NO_MAIN}" width:200px; alt='${recipe[i].RCP_NM}'>
+                     <p>${recipe[i].RCP_NM}</p>
+                     </a>
+                    </div>
+                    ` 
+                  }
+                  else{
+                    contents +=`
+                    <div class='content'>
+                    <a href="/Detail" class="data_link">
+                     <img src="${recipe[i].ATT_FILE_NO_MAIN}" width:200px; alt='${recipe[i].RCP_NM}'>
+                     <p>${recipe[i].RCP_NM}</p>
+                     </a>
+                    </div>
+                    `
+                  }
                 }
-                else{
-                  contents +=`
-                  <div class='content'>
-                  <a href="/Detail" class="data_link">
-                   <img src="${recipe[i].ATT_FILE_NO_MAIN}" width:200px; alt='${recipe[i].RCP_NM}'>
-                   <p>${recipe[i].RCP_NM}</p>
-                   </a>
-                  </div>
-                  `
-                }
+                container.innerHTML=contents
+                //버튼이벤트에 레시피 총 갯수 넘기기
+                search_button_event(json.COOKRCP01.total_count)
+                contnent_click_event()
               }
-              container.innerHTML=contents
-              //버튼이벤트에 레시피 총 갯수 넘기기
-              search_button_event(json.COOKRCP01.total_count)
-              contnent_click_event()
+              else{
+                console.log(json.COOKRCP01.total_count)
+                contents =`<div class='no_content'><h1>죄송합니다 찾으시는 레시피가 없습니다.</h1></div>`
+                container.innerHTML=contents
+                search_button_event(5)
+              }
             }) 
          }
-        else{
+        else if(first==1){
           fetch(`http://openapi.foodsafetykorea.go.kr/api/f26d6b1de5e446268b4a/COOKRCP01/json/${start}/${end}`)
           .then((res) => {
             return res.json(); //Promise 반환
@@ -140,6 +187,7 @@ export default class Search{
             search_container_info = recipe
             search_title.innerText = '오늘의 추천 레시피'
             console.log(recipe)
+            console.log('시작')
             for(let i=0 ; i<recipe.length ; i++){
               contents +=`
               <div class='content'>
@@ -165,7 +213,8 @@ export default class Search{
       let btn_l = document.querySelector('#content_stage_btn_l')
       let btn_r = document.querySelector('#content_stage_btn_r')
       let container = document.querySelector('.content_stage_container')
-
+      console.log(total)
+      console.log( 5-total)
       /**사용자가 버튼을 사용한뒤 다시 검색할 수 있으므로 */
       container.style.transform = `translateX(${content_pos}px)`
 
@@ -185,7 +234,7 @@ export default class Search{
       })
       btn_r.addEventListener('click',()=>{
         console.log('count',count,'pos',content_pos,5+-(total))
-        if(5+-(total) !== count){
+        if(5-(total) !== count){
           count -=1
           content_pos -= 250
           container.style.transform=`translateX(${content_pos}px)`
@@ -198,7 +247,9 @@ export default class Search{
       })
     }
     
-    /**컨텐츠에 클릭이벤트 추가 */
+    /**컨텐츠에 클릭이벤트 추가 
+     * 이동자체는 App.js에서 일괄처리함
+    */
     let contnent_click_event = () =>{
       let container = document.querySelectorAll('.content')
       for(let i=0 ; i< container.length ;i++){
@@ -264,7 +315,6 @@ export default class Search{
           let search_title = document.querySelector('#search_title')
           let tag_container_tags=document.querySelectorAll('.tag_container_tag p')
           let tag_title =''
-            console.log(tag_container_tags)
             for(let i=0; i<tag_container_tags.length ;i++){
               if(i==tag_container_tags.length-1){
                 tag_title +=`${tag_container_tags[i].innerText} 관련 레시피`
@@ -314,6 +364,7 @@ export default class Search{
             }
             container.innerHTML =''
             container.innerHTML = contaents
+            search_button_event(result.length)
             contnent_click_event()
           }) 
         })
@@ -325,9 +376,14 @@ export default class Search{
 
     //시작할때 이벤트
     let start_event = () =>{
+      let search_box = document.querySelector('.search_box')
+      let random = parseInt(Math.random()*4)+1
+      search_box.style.backgroundImage= `url('../public/background/background_img${random}.jpg')`
+      search_box.style.backgroundSize='cover'
       let random_start = parseInt(Math.random()*990)
       let nav = document.querySelector('.nav_container')
       nav.style.background='none'
+      let search_box_input_ingredient_box = document.querySelector('.search_box_input_ingredient_box')
       search_event(random_start,random_start+10,1)
        //검색창 버튼에 검색이벤트 , 엔터이벤트 추가 
       search_btn.addEventListener('click',()=>{
@@ -336,9 +392,12 @@ export default class Search{
       search_input.addEventListener('keydown',(event)=>{
         if( event.keyCode == 13){
           search_event()
+          search_box_input_ingredient_box.classList.remove('onoff')
+
         }
       })
       tag_event()
+      input_search_event()
     } 
 
     start_event()
