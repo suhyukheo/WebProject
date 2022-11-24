@@ -33,7 +33,7 @@ export default class Storage{
     let relation_tag_box = document.querySelector('.relation_tag_box')
     const Data = new SearchData()
     const tag_all = Data.all_tag
-    /**input에 들어갈 이벤트 현재 만드는거*/
+    /**input에 들어갈 이벤트 */
     let user_input_focus_event = () =>{
        let storage_user_input =document.querySelector('#storage_input')
        let result = []
@@ -90,9 +90,16 @@ export default class Storage{
         let contents =''
         let tag_contents ='' 
         content_box.innerHTML = ''
+        console.log(storage_list)
         for(let i=0; i<storage_list.length;i++){
-          contents +=`<div class='ingredient'><p>${storage_list[i].name}</p><button class='btn'>del</button></div>`
-          tag_contents +=`<div class='tag'>${storage_list[i].name}</div>`
+          console.log(storage_list[i]['tf']) 
+          if(storage_list[i]['tf']=='true'){
+            contents +=`<div class='ingredient'><p>${storage_list[i].name}</p><button class='btn'>del</button></div>`
+            tag_contents +=`<div class='tag'>${storage_list[i].name}</div>`
+          }
+          else{
+            contents +=`<div class='ingredient false_tag'><p>${storage_list[i].name}</p><button class='btn'>del</button></div>`
+          }
         }
         content_box.innerHTML=contents
         storage_tag_container.innerHTML = tag_contents
@@ -121,6 +128,7 @@ export default class Storage{
       let user_storage = localStorage.getItem('user_storage')
       user_storage = JSON.parse(user_storage)
       let result = 0
+      let tf=null
       /** 중복 입력 가능시
        * user_storage.push({'name':`${storage_input.value}`,'date':``,'type':``})
         let new_user_stroge = JSON.stringify(user_storage)
@@ -129,12 +137,16 @@ export default class Storage{
         */
       //중복 입력 배제
       for(let i=0; i<user_storage.length ;i++){
-        if(user_storage[i]['name'] === storage_input.value){
+        if(user_storage[i]['name'] === storage_input.value || storage_input.value ==''){
           result = 1 
         }
       }
       if(result===0){
-        user_storage.push({'name':`${storage_input.value}`,'date':``,'type':``})
+        if(tag_all.includes(storage_input.value)){
+          tf =true
+        }
+        else{tf=false}
+        user_storage.push({'name':`${storage_input.value}`,'date':``,'type':``,'tf':`${tf}`})
         let new_user_stroge = JSON.stringify(user_storage)
         localStorage.setItem('user_storage',new_user_stroge)
         append_storage_items(user_storage)
