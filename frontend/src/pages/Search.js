@@ -423,6 +423,8 @@ export default class Search{
       let random_start = parseInt(Math.random()*990)
       let nav = document.querySelector('.nav_container')
       let search_box_input_ingredient_box = document.querySelector('.search_box_input_ingredient_box')
+      let App = document.querySelector('.App')
+      App.style.overflow = 'auto' 
       search_box.style.backgroundImage= `url('../public/background/background_img${random}.jpg')`
       search_box.style.backgroundSize='cover'
       nav.style.background='none'
