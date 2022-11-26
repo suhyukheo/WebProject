@@ -2,7 +2,8 @@
 :root{
   --Bg--Color: #eef;
   --Nav-Font-Size:1.25rem;
-  --nav-bg:#7FB77E;
+  --nav-bg:#406343;
+  --nav-bg-2:#A3A847;
 }
 
 *{
@@ -31,7 +32,8 @@ a{
 
 /*nav*/
 .nav_container{
-  z-index: 200;
+  transition: all 0.5s;
+  z-index: 2000;
   position: fixed;
   width: 100%;
   height: 80px;
@@ -39,7 +41,7 @@ a{
   align-items: center;
   justify-content: space-between;
   padding: 0px 20px;
-  background-color: none;
+  background: none;
   .logo{
     font-family: 'Noto Serif Oriya', serif;
     width: 20%;
@@ -82,6 +84,9 @@ a{
       border-bottom: 2px solid black;
     }
   }
+}
+.navcolor_dark{
+  background-color: var(--nav-bg);
 }
 
 .App{
@@ -469,13 +474,16 @@ a{
       }
       .search_box2_tag{
         width: 1250px;
+        margin-bottom:50px;
         #tag_search_btn{
           width: 100%;
           height: 5vh;
-          background-color: #7FB77E;
+          background-color: var(--nav-bg);
           display: flex;
           align-items: center;
           justify-content: center;
+          color: #eee;
+          font-size: large;
         }
         .tag_bar{
           width: 100%;

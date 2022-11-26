@@ -1,7 +1,7 @@
 import Search from "./pages/Search.js"
 import Main from "./pages/Main.js"
 import Storage from "./pages/Storage.js"
-import Detail from "./pages/Detaile.js"
+import Detail from "./pages/Detail.js"
 //라우팅 함수
 const container = document.querySelector('.App')
 const BASE_URL =document.location.origin

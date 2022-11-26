@@ -87,9 +87,20 @@ export default class Detail{
       <div><p>나트륨: ${recipe['INFO_NA']}g</p></div>
       ` 
     }
+
+    let detail_scrrol = () =>{
+      window.addEventListener('scroll', () =>{
+        if(window.scrollY>10){
+          nav.classList.add('navcolor_dark')
+        }
+        else{
+          nav.classList.remove('navcolor_dark')
+        }
+      })
+    }
     let detail_start_event = () =>{
       let nav = document.querySelector('.nav_container')
-      nav.style.backgroundColor='#7FB77E'
+      nav.classList.add('navcolor_dark')
       make_recipe_left_box()
       make_recipe_right_box()
     }

@@ -47,7 +47,9 @@ export default class Main{
       </div>
      </div>
     </div>
-    <div class='main_foot'></div>
+    <div class='main_foot'>
+     <div>뭔가 넣어야 합니다.</div>
+    </div>
     </div> 
     `
   }
@@ -63,7 +65,7 @@ export default class Main{
     }
 
     let word_event = () =>{
-      const content = "Racipe \n  and \n Recommendation \n for your life .";
+      const content = "Racipe \n  and \n Recommendation \n for your meal .";
       const text = document.querySelector("#title h1");
       text.innerHTML = ''
       const speed = 200
@@ -78,16 +80,34 @@ export default class Main{
       }
     }
 
+    let nav_scroll_event = () =>{
+      let nav =document.querySelector('.nav_container')
+      window.addEventListener('scroll', () =>{
+        console.log(location.pathname)
+        if(location.pathname !== '/Detail'){
+          if(window.scrollY>10){
+            nav.classList.add('navcolor_dark')
+          }
+          else{
+            nav.classList.remove('navcolor_dark')
+          }
+        }
+        else{
+          nav.classList.add('navcolor_dark')
+        }
+      })
+    }
+
 
     let main_start_event = () =>{
       let App = document.querySelector('.App')
-      let nav = document.querySelector('.nav_container')
-      nav.style.background='none'
-
-      let random = parseInt(Math.random()*4)+1
+      let nav =document.querySelector('.nav_container')
+      let random = parseInt(Math.random()*3)+1
       let main = document.querySelector('.main_head')
       main.style.backgroundImage= `url('../public/background/background_img${random}.jpg')`
+      nav.classList.remove('navcolor_dark')
       word_event()
+      nav_scroll_event()
     }
     main_start_event()
   }

@@ -421,15 +421,13 @@ export default class Search{
       let search_box = document.querySelector('.search_box')
       let random = parseInt(Math.random()*4)+1
       let random_start = parseInt(Math.random()*990)
-      let nav = document.querySelector('.nav_container')
       let search_box_input_ingredient_box = document.querySelector('.search_box_input_ingredient_box')
-      let App = document.querySelector('.App')
-      App.style.overflow = 'auto' 
       search_box.style.backgroundImage= `url('../public/background/background_img${random}.jpg')`
       search_box.style.backgroundSize='cover'
-      nav.style.background='none'
       let user_storage = import_user_storage()
       let new_user_stroge = []
+      let nav_container = document.querySelector('.nav_container')
+      nav_container.classList.remove('navcolor_dark')
       for(let i=0 ; i<user_storage.length ;i++){
         if(user_storage[i].tf == 'true'){
           new_user_stroge.push(user_storage[i])
@@ -456,7 +454,6 @@ export default class Search{
       tag_event()
       input_search_event()
     } 
-
     start_event()
   }
 

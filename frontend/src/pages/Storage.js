@@ -170,7 +170,7 @@ export default class Storage{
     let storage_start = () =>{
       load_storage_items()
       let nav = document.querySelector('.nav_container')
-      nav.style.backgroundColor='#7FB77E'
+      nav.classList.add('navcolor_dark')
       storage_btn.addEventListener('click',()=>{
         push_user_data()
       })
