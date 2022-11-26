@@ -94,11 +94,11 @@ export default class Storage{
         for(let i=0; i<storage_list.length;i++){
           console.log(storage_list[i]['tf']) 
           if(storage_list[i]['tf']=='true'){
-            contents +=`<div class='ingredient'><p>${storage_list[i].name}</p><button class='btn'>del</button></div>`
+            contents +=`<div class='ingredient'><p>${storage_list[i].name}</p><i class="fa-solid fa-trash-can btn fa-2x"></i></div>`
             tag_contents +=`<div class='tag'>${storage_list[i].name}</div>`
           }
           else{
-            contents +=`<div class='ingredient false_tag'><p>${storage_list[i].name}</p><button class='btn'>del</button></div>`
+            contents +=`<div class='ingredient false_tag'><p>${storage_list[i].name}</p><i class="fa-solid fa-trash-can btn fa-2x"></i></div>`
           }
         }
         content_box.innerHTML=contents
@@ -114,7 +114,8 @@ export default class Storage{
 
     /**추가된 컨텐츠의 삭제 버튼의 이벤트를 추가한다. */  
     let items_remove_event = () =>{
-      let contents_list = document.querySelectorAll('.ingredient button')
+      let contents_list = document.querySelectorAll('.ingredient .btn')
+      console.log(contents_list)
       for(let i= 0 ;i<contents_list.length ;i++){
           contents_list[i].addEventListener('click',()=>{
           remove_user_data(i)

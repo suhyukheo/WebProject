@@ -5,14 +5,13 @@ export default class Search{
   HTML(){
     return `<div class='search'>
                <div class='search_box'>
-               <h5>레시피 그리고 추천..</h5>
                <div class='search_box_input'>
-               <input id='search_input' type='text' placeholder='재료명 검색..' autocomplete='off'></input>
-               <div class='icon' id='btn'><i class="fa-solid fa-magnifying-glass fa-1.5x"></i></div>
+                <input id='search_input' type='text' placeholder='재료명 검색..' autocomplete='off'></input>
+                <div class='icon' id='btn'><i class="fa-solid fa-magnifying-glass fa-2x"></i>
+               </div>
                <div class='search_box_input_ingredient_box'>
                </div>
                </div>
-               <p id='move_to_tag'>태그 사용하기</p>
                </div>
                <div class='search_box2'>
                <div class='search_container'>
@@ -333,16 +332,16 @@ export default class Search{
           let contents =''
           let container = document.querySelector('.content_stage_container')
             console.log(tag_container_tags)
-            for(let i=0; i<tag_container_tags.length ;i++){
-              if(i==tag_container_tags.length-1){ 
-                tag_title +=`${tag_container_tags[i].innerText} 관련 레시피`
-              }
-              else{
-                tag_title +=`${tag_container_tags[i].innerText},`
-              }
-            }
-            search_title.innerText = tag_title
             if(tag_container_tags.length>0){
+              for(let i=0; i<tag_container_tags.length ;i++){
+                if(i==tag_container_tags.length-1){ 
+                  tag_title +=`${tag_container_tags[i].innerText} 관련 레시피`
+                }
+                else{
+                  tag_title +=`${tag_container_tags[i].innerText},`
+                }
+              }
+              search_title.innerText = tag_title
               fetch(`http://openapi.foodsafetykorea.go.kr/api/f26d6b1de5e446268b4a/COOKRCP01/json/1/100/RCP_PARTS_DTLS=${tag_container_tags[0].innerText}`)
               .then((res) => {
                return res.json(); //Promise 반환
@@ -399,6 +398,9 @@ export default class Search{
                 }
               }
              }) 
+            }
+            else{
+              
             }
            
         })

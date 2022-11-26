@@ -16,11 +16,16 @@ export default class Detail{
         </div>
        </div>
        <div class='recipe_right_box'>
-       <h2>재료정보</h2>
+       <div style='overflow:hidden'>
+       <h2>재료</h2>
+       <p>=============================</p>
        <div class='ingredient_box'></div>
-       <h2>영양정보</h2>
+       </div>
+       <div style='overflow:hidden'>
+       <h2 style='margin-top:75px'>영양 정보</h2>
+       <p>=============================</p>
        <div class='nutrition_box'></div>
-  
+       </div>
        </div>
        </div>
       </div>
@@ -45,10 +50,10 @@ export default class Detail{
       recipe_left_img_box.style.background = `
       linear-gradient(
         to bottom,
-        rgba(255, 255, 255, 0.45) 60%,
-        rgba(255, 255, 255, 0.55) 70%,
-        rgba(255, 255, 255, 0.65) 80%,
-        rgba(255, 255, 255, 0.85) 90%,
+        rgba(255, 255, 255, 0.25) 60%,
+        rgba(255, 255, 255, 0.4) 70%,
+        rgba(255, 255, 255, 0.55) 80%,
+        rgba(255, 255, 255, 0.7) 90%,
         rgba(255, 255, 255, 1) 100%
       ), url('${recipe['ATT_FILE_NO_MK']}')
       `

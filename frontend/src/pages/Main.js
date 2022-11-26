@@ -14,7 +14,7 @@ export default class Main{
     </div>
     <div class='main_body'>
      <div class='info_title'>
-      <h2>공공데이터터 포털 API를 활용한</h2>
+      <h2>공공데이터 포털 API를 활용한</h2>
       <h2> 2000여가지의 레시피 검색 시스템.</h2>
      </div>
      <div class='info_body'>
@@ -47,8 +47,10 @@ export default class Main{
       </div>
      </div>
     </div>
-    <div class='main_foot'>
-     <div>뭔가 넣어야 합니다.</div>
+    <div class='foot'>
+      <p>자세한 문의사항:abcd_@gamil.com</p>
+      <p>자료제공:나무위키</p>
+      <p></p>
     </div>
     </div> 
     `
@@ -65,10 +67,10 @@ export default class Main{
     }
 
     let word_event = () =>{
-      const content = "Racipe \n  and \n Recommendation \n for your meal .";
+      const content = "Recipe \n  & \n Recommendation \n for your meal .";
       const text = document.querySelector("#title h1");
       text.innerHTML = ''
-      const speed = 200
+      const speed = 100
       for(let i=0;i<content.length;i++){
         setTimeout(()=>{
           if(i==content.length-1){
@@ -84,7 +86,7 @@ export default class Main{
       let nav =document.querySelector('.nav_container')
       window.addEventListener('scroll', () =>{
         console.log(location.pathname)
-        if(location.pathname !== '/Detail'){
+        if(location.pathname === '/' || location.pathname=='/Search'){
           if(window.scrollY>10){
             nav.classList.add('navcolor_dark')
           }

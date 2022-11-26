@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Oriya&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
 :root {
   --Bg--Color: #eef;
   --Nav-Font-Size:1.25rem;
-  --nav-bg:#406343;
+  --nav-bg:#5f8d4e;
   --nav-bg-2:#A3A847;
 }
 
@@ -87,7 +88,7 @@ a {
   margin-left: 1vh;
 }
 .nav_container .menu a.data_link:hover {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid white;
 }
 
 .navcolor_dark {
@@ -103,7 +104,7 @@ a {
 /*main*/
 .main {
   width: 100%;
-  height: 250vh;
+  height: 200vh;
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
@@ -216,6 +217,7 @@ a {
   background-color: rgb(240, 240, 240);
 }
 .main .main_body .info_title {
+  font-family: "Jua", sans-serif;
   width: 100%;
   height: 16vh;
   display: flex;
@@ -225,6 +227,7 @@ a {
   background-color: white;
 }
 .main .main_body .info_body {
+  font-family: "Jua", sans-serif;
   width: 1200px;
   height: 64vh;
   display: flex;
@@ -248,20 +251,26 @@ a {
 .main .main_body .info_body .info .info_text {
   width: 333.3px;
   height: 20vh;
+  font-weight: 300;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #1B364B;
+  background-color: #81c26b;
   color: white;
 }
 .main .main_body .info_body .info .info_text h3 {
   margin-bottom: 16px;
 }
-.main .main_foot {
+.main .foot {
   width: 100%;
-  height: 50vh;
-  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #eee;
+  font-family: "Jua", sans-serif;
+  color: var(--nav-bg);
 }
 
 /*storage*/
@@ -306,12 +315,8 @@ a {
 .storage .storage_container .storage_left .user_ingredient .ingredient p {
   font-size: 1.25rem;
 }
-.storage .storage_container .storage_left .user_ingredient .ingredient button {
-  width: 50px;
-  height: 30px;
-  border: 2px solid black;
-  border-radius: 5px;
-  background-color: white;
+.storage .storage_container .storage_left .user_ingredient .ingredient .btn:hover {
+  color: red;
 }
 .storage .storage_container .storage_left .user_ingredient .false_tag {
   border: 5px solid red;
@@ -439,17 +444,18 @@ a {
   border-bottom: 1px solid black;
 }
 .search .search_box .search_box_input {
-  width: 30%;
-  height: 50px;
+  width: 35%;
+  height: 60px;
   background-color: white;
   border-radius: 20px;
   display: flex;
   justify-content: center;
+  align-items: center;
   position: relative;
 }
 .search .search_box .search_box_input input {
   width: 100%;
-  height: 50px;
+  height: 60px;
   font-size: 1.25vw;
   background-color: white;
   border-radius: 10px;
@@ -457,8 +463,8 @@ a {
   padding: 10px;
 }
 .search .search_box .search_box_input .icon {
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   position: absolute;
   z-index: 0;
   right: 0;
@@ -468,7 +474,8 @@ a {
   align-items: center;
 }
 .search .search_box .search_box_input .icon:hover {
-  border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   background-color: black;
   color: white;
 }
@@ -508,6 +515,7 @@ a {
 .search .search_box2 .search_box2_tag {
   width: 1250px;
   margin-bottom: 50px;
+  font-family: "Jua", sans-serif;
 }
 .search .search_box2 .search_box2_tag #tag_search_btn {
   width: 100%;
@@ -698,6 +706,8 @@ a {
   margin-top: 10px;
   width: 180px;
   color: black;
+  text-align: center;
+  font-weight: 600;
 }
 .search .search_box2 .search_container .content_stage .no_content {
   height: 250px;
@@ -741,7 +751,7 @@ a {
 .detail .detaile_container .recipe_left_box .img_box {
   width: 100%;
   min-height: 400px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.45) 60%, rgba(255, 255, 255, 0.55) 70%, rgba(255, 255, 255, 0.65) 80%, rgba(255, 255, 255, 0.85) 90%, rgb(255, 255, 255) 100%), url("../public/background/background_img2.jpg");
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.25) 60%, rgba(255, 255, 255, 0.4) 70%, rgba(255, 255, 255, 0.55) 80%, rgba(255, 255, 255, 0.7) 90%, rgb(255, 255, 255) 100%), url("../public/background/background_img2.jpg");
   display: flex;
   align-items: center;
   justify-content: center;
@@ -750,8 +760,10 @@ a {
   background-repeat: no-repeat;
 }
 .detail .detaile_container .recipe_left_box .img_box p {
+  font-family: "Jua", sans-serif;
   font-size: 3rem;
   color: white;
+  text-shadow: 4px 4px 5px black;
 }
 .detail .detaile_container .recipe_left_box .recipe_info {
   width: 100%;
@@ -793,15 +805,13 @@ a {
   overflow: auto;
 }
 .detail .detaile_container .recipe_right_box h2 {
-  margin: 25px 0px;
+  margin: 12.5px 10px;
 }
 .detail .detaile_container .recipe_right_box .ingredient_box {
   width: 100%;
   height: auto;
-  border-radius: 10px;
   background-color: white;
   padding: 10px;
-  border: 2.5px solid black;
 }
 .detail .detaile_container .recipe_right_box .ingredient_box p {
   font-size: 1rem;
@@ -810,7 +820,5 @@ a {
   width: 100%;
   background-color: white;
   padding: 10px;
-  border: 2.5px solid black;
   margin-bottom: 50px;
-  border-radius: 10px;
 }/*# sourceMappingURL=style.css.map */
