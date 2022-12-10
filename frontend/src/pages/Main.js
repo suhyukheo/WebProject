@@ -19,7 +19,7 @@ export default class Main{
      </div>
      <div class='info_body'>
       <div class='info'>
-       <img src='../public/background/search_icon.png'></img>
+       <img src='../public/icons/search_icon.png'></img>
        <div class='info_text'>
         <h3>검색 페이지</h3>
         <p>맞춤 레시피 추천</p>
@@ -28,7 +28,7 @@ export default class Main{
        </div>
       </div>
       <div class='info'>
-       <img src='../public/background/detaile_icon.png'></img>
+       <img src='../public/icons/detaile_icon.png'></img>
        <div class='info_text'>
         <h3>디테일 페이지</h3>
         <p>조리과정 설명</p>
@@ -37,7 +37,7 @@ export default class Main{
        </div>
       </div>
       <div class='info'>
-       <img src='../public/background/storage_icon.png'></img>
+       <img src='../public/icons/storage_icon.png'></img>
        <div class='info_text'>
        <h3>나만의 냉장고</h3>
        <p>재료 저장</p>

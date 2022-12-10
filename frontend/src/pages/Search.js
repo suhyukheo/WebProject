@@ -167,8 +167,11 @@ export default class Search{
               else{
                 console.log(json.COOKRCP01.total_count)
                 contents =`<div class='no_content'>
-                  <h1>죄송합니다 찾으시는 레시피가 없습니다.</h1>
-                  <p>태그를 사용해보세요</p>
+                 <img src="../public/icons/not_found_icon.png">
+                 <div class="no_content_text">
+                   <p class="title">${value}에 관한 레시피가 없습니다!</p>
+                   <p>태그를 통해서 찾아보세요!</p>
+                 </div>
                 </div>`
                 container.innerHTML=contents
                 search_button_event(5)
