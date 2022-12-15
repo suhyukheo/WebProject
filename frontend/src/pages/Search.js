@@ -21,23 +21,23 @@ export default class Search{
                    <button id='content_stage_btn_r' class='btn'><i class="fa-solid fa-arrow-right" fa-1.5></i></button>
                    <div class='content_stage_container'>        
                       <div class='content'>
-                      <img src="../public/background/load_img.png" width:200px;>
+                      <img src="../public/icons/load_img.png" width:200px;>
                       <p>예시..</p>
                       </div>
                       <div class='content'>
-                      <img src="../public/background/load_img.png" width:200px;>
+                      <img src="../public/icons/load_img.png" width:200px;>
                       <p>예시..</p>
                       </div>
                       <div class='content'>
-                       <img src="../public/background/load_img.png" width:200px;>
+                       <img src="../public/icons/load_img.png" width:200px;>
                        <p>예시..</p>
                      </div>
                      <div class='content'>
-                       <img src="../public/background/load_img.png" width:200px;>
+                       <img src="../public/icons/load_img.png" width:200px;>
                        <p>예시..</p>
                      </div>
                      <div class='content'>
-                       <img src="../public/background/load_img.png" width:200px;>
+                       <img src="../public/icons/load_img.png" width:200px;>
                        <p>예시..</p>
                      </div>
                    </div>
@@ -70,7 +70,7 @@ export default class Search{
   EVENT(){
 
     const Data = new SearchData()
-    const tag_array = Data.classification
+    const tag_classification = Data.classification
     const tag_all = Data.all_tag
 
     let search_input = document.querySelector('#search_input')
@@ -90,13 +90,21 @@ export default class Search{
         search_box_input_ingredient_box.innerHTML =''
          contents=''
          result =[]
-         if(search_user_input.value !==''){
-           for(let i=0; i<tag_all.length ; i++){
-             if(tag_all[i].includes(search_user_input.value)){
-               result.push(tag_all[i])
-             }
-           }
-         }
+         if(search_input.value !==''){
+          for(let i=0; i<tag_all.length ; i++){
+            if(tag_all[i].includes(search_input.value)){
+              result.push(tag_all[i])
+            }
+          }
+          for(let i in tag_classification){
+            if(i.includes(search_input.value)){
+              let tags = tag_classification[i]
+              for(let tag of tags){
+                result.push(tag)
+              }
+            }
+          }
+        }
          for(let i=0 ; i<result.length ;i++){
           contents +=`<div class='ingredient'>${result[i]}</div>`
          }
@@ -183,6 +191,7 @@ export default class Search{
           .then((res) => {
             return res.json(); //Promise 반환
           }).then((json) => {
+            console.log(json)
             let recipe = json.COOKRCP01.row
             search_container_info = recipe
             search_title.innerText = '오늘의 추천 레시피'
@@ -266,7 +275,7 @@ export default class Search{
       //유저 데이터 불러와서 태그화
       let user_storage_import_btn_event = () =>{
         import_btn.addEventListener('click',()=>{
-          let user_storage =import_user_storage()
+          let user_storage = import_user_storage()
           let contents =''
           for(let i=0 ; i < user_storage.length ; i++){
             if(user_storage[i].tf ==='true'){
@@ -401,11 +410,7 @@ export default class Search{
                 }
               }
              }) 
-            }
-            else{
-              
-            }
-           
+            }           
         })
       }
 

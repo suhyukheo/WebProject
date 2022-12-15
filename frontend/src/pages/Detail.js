@@ -103,6 +103,7 @@ export default class Detail{
         }
       })
     }
+    
     let detail_start_event = () =>{
       let nav = document.querySelector('.nav_container')
       nav.classList.add('navcolor_dark')

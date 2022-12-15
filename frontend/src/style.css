@@ -275,6 +275,7 @@ a {
 
 /*storage*/
 .storage {
+  position: relative;
   width: 100%;
   height: 100%;
   padding-top: 90px;
@@ -312,8 +313,13 @@ a {
   margin-bottom: 25px;
   border-radius: 25px;
 }
+.storage .storage_container .storage_left .user_ingredient .ingredient .info_box {
+  width: auto;
+  display: flex;
+}
 .storage .storage_container .storage_left .user_ingredient .ingredient p {
   font-size: 1.25rem;
+  margin-right: 20px;
 }
 .storage .storage_container .storage_left .user_ingredient .ingredient .btn:hover {
   color: red;
@@ -619,6 +625,33 @@ a {
   justify-content: center;
   align-items: center;
   margin-right: 25px;
+}
+.search .search_box2 .search_box2_tag .tag_container .tag_container_tag i:hover {
+  color: red;
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
+  -webkit-animation-name: slidein;
+          animation-name: slidein;
+}
+@-webkit-keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
 }
 .search .search_box2 .search_box2_tag .tag_container p {
   margin-right: 10px;

@@ -242,6 +242,7 @@ a{
 
  /*storage*/
  .storage{
+  position: relative;
   width: 100%;
   height: 100%;
   padding-top: 90px;
@@ -274,8 +275,13 @@ a{
           border: 5px solid var(--nav-bg);
           margin-bottom: 25px;
           border-radius: 25px;
+          .info_box{
+            width: auto;
+            display: flex;
+          }
           p{
             font-size: 1.25rem;
+            margin-right: 20px;
           }
           .btn:hover{
             color: red;
@@ -585,7 +591,15 @@ a{
             justify-content: center;
             align-items: center;
             margin-right: 25px;
+            i:hover{
+              color: red;
+              animation-duration: 3s;
+              animation-name: slidein;
+            }
           }
+          @keyframes slidein {
+          }
+
           p{
             margin-right: 10px;
           }

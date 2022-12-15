@@ -33,6 +33,7 @@ export default class Storage{
     let relation_tag_box = document.querySelector('.relation_tag_box')
     const Data = new SearchData()
     const tag_all = Data.all_tag
+    const tag_classification =Data.classification
     /**input에 들어갈 이벤트 */
     let user_input_focus_event = () =>{
        let storage_user_input =document.querySelector('#storage_input')
@@ -49,6 +50,14 @@ export default class Storage{
             for(let i=0; i<tag_all.length ; i++){
               if(tag_all[i].includes(storage_user_input.value)){
                 result.push(tag_all[i])
+              }
+            }
+            for(let i in tag_classification){
+              if(i.includes(storage_user_input.value)){
+                let tags = tag_classification[i]
+                for(let tag of tags){
+                  result.push(tag)
+                }
               }
             }
           }
@@ -94,7 +103,11 @@ export default class Storage{
         for(let i=0; i<storage_list.length;i++){
           console.log(storage_list[i]['tf']) 
           if(storage_list[i]['tf']=='true'){
-            contents +=`<div class='ingredient'><p>${storage_list[i].name}</p><i class="fa-solid fa-trash-can btn fa-2x"></i></div>`
+            contents +=`<div class='ingredient'> 
+            <div class="info_box">
+              <p>${storage_list[i].date}</p><p>${storage_list[i].name}</p>
+            </div>
+            <i class="fa-solid fa-trash-can btn fa-2x"></i></div>`
             tag_contents +=`<div class='tag'>${storage_list[i].name}</div>`
           }
           else{
@@ -147,7 +160,7 @@ export default class Storage{
           tf =true
         }
         else{tf=false}
-        user_storage.push({'name':`${storage_input.value}`,'date':``,'type':``,'tf':`${tf}`})
+        user_storage.push({'name':`${storage_input.value}`,'date':`${new Date().toLocaleDateString("ko")}`,'type':``,'tf':`${tf}`})
         let new_user_stroge = JSON.stringify(user_storage)
         localStorage.setItem('user_storage',new_user_stroge)
         append_storage_items(user_storage)
