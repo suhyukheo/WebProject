@@ -42,7 +42,7 @@ const navigate = (url) =>{
 }
 
 
-window.addEventListener("popstate",router) 
+window.addEventListener("popstate",router) // 백
 
 //DOMContentLoaded script파일이 모두 읽히고 실행되는 로드 이벤트
 document.addEventListener("DOMContentLoaded", ()=>{

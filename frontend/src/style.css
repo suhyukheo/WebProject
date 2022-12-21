@@ -630,27 +630,41 @@ a {
   color: red;
   -webkit-animation-duration: 3s;
           animation-duration: 3s;
-  -webkit-animation-name: slidein;
-          animation-name: slidein;
+  -webkit-animation-name: shake;
+          animation-name: shake;
 }
-@-webkit-keyframes slidein {
-  from {
-    margin-left: 100%;
-    width: 300%;
+@-webkit-keyframes shake {
+  0% {
+    transform: rotate(0deg) scale(1);
   }
-  to {
-    margin-left: 0%;
-    width: 100%;
+  25% {
+    transform: rotate(-60deg);
+  }
+  50% {
+    transform: rotate(0deg) scale(1.1);
+  }
+  75% {
+    transform: rotate(-60deg);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
   }
 }
-@keyframes slidein {
-  from {
-    margin-left: 100%;
-    width: 300%;
+@keyframes shake {
+  0% {
+    transform: rotate(0deg) scale(1);
   }
-  to {
-    margin-left: 0%;
-    width: 100%;
+  25% {
+    transform: rotate(-60deg);
+  }
+  50% {
+    transform: rotate(0deg) scale(1.1);
+  }
+  75% {
+    transform: rotate(-60deg);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
   }
 }
 .search .search_box2 .search_box2_tag .tag_container p {

@@ -71,6 +71,7 @@ export default class Search{
 
     const Data = new SearchData()
     const tag_classification = Data.classification
+    const tag_array = Data.classification
     const tag_all = Data.all_tag
 
     let search_input = document.querySelector('#search_input')
@@ -83,6 +84,7 @@ export default class Search{
       let search_box_input_ingredient_box = document.querySelector('.search_box_input_ingredient_box')
       let result = []
       let contents =''
+      let select =''
       //여기부터 다시
       search_user_input.addEventListener('focus',()=>{
         search_box_input_ingredient_box.classList.add('onoff')
@@ -112,13 +114,16 @@ export default class Search{
          let ingredient_tags = document.querySelectorAll('.ingredient')
          for(let i=0 ;i< ingredient_tags.length ;i++){
           ingredient_tags[i].addEventListener('mouseover',()=>{
+             search_user_input.value = ''
              search_user_input.value =ingredient_tags[i].innerText
+             select = ingredient_tags[i].innerText
            })
          }
         })
       })
       search_user_input.addEventListener('focusout',()=>{
       search_box_input_ingredient_box.classList.remove('onoff')
+      search_user_input.value = select
       })
     }
    
@@ -142,8 +147,6 @@ export default class Search{
               let recipe = json.COOKRCP01.row
               search_container_info = recipe
               search_title.innerText = value + ' 관련 레시피'
-              //레시피가 없을 경우 거르기
-              console.log(json.COOKRCP01.RESULT.CODE)
               if(json.COOKRCP01.RESULT.CODE!='INFO-200'){
                 for(let i=0 ; i<recipe.length ; i++){
                   if(recipe[i].ATT_FILE_NO_MAIN !== ''){
@@ -184,7 +187,7 @@ export default class Search{
                 container.innerHTML=contents
                 search_button_event(5)
               }
-            }) 
+            }).catch(()=>{console.log("err")})
          }
         else if(first==1){
           fetch(`http://openapi.foodsafetykorea.go.kr/api/f26d6b1de5e446268b4a/COOKRCP01/json/${start}/${end}`)

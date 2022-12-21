@@ -49,7 +49,7 @@ export default class Main{
     </div>
     <div class='foot'>
       <p>자세한 문의사항:abcd_@gamil.com</p>
-      <p>자료제공:나무위키</p>
+      <p>API 제공: 공공데이터포털 조리식품DB</p>
       <p></p>
     </div>
     </div> 

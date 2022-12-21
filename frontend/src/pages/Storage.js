@@ -39,6 +39,7 @@ export default class Storage{
        let storage_user_input =document.querySelector('#storage_input')
        let result = []
        let contents =''
+       let select = ''
        //여기부터 다시
        storage_user_input.addEventListener('focus',()=>{
          relation_tag_box.classList.add('onoff')
@@ -68,13 +69,16 @@ export default class Storage{
           let relation_tags = document.querySelectorAll('.relation_tag')
           for(let i=0 ;i< relation_tags.length ;i++){
             relation_tags[i].addEventListener('mouseover',()=>{
+              storage_user_input.value = ''
               storage_user_input.value = relation_tags[i].innerText
+              select = relation_tags[i].innerText
             })
           }
          })
        })
        storage_user_input.addEventListener('focusout',()=>{
         relation_tag_box.classList.remove('onoff')
+        storage_input.value = select
        })
     }
 

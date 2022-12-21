@@ -594,10 +594,15 @@ a{
             i:hover{
               color: red;
               animation-duration: 3s;
-              animation-name: slidein;
+              animation-name: shake;
             }
-          }
-          @keyframes slidein {
+            @keyframes shake {
+              0% { transform: rotate(0deg) scale(1.0)}
+              25% { transform: rotate(-60deg)}
+              50% { transform: rotate(0deg) scale(1.1)}
+              75% { transform: rotate(-60deg)}
+              100% { transform: rotate(0deg) scale(1.0)}
+            } 
           }
 
           p{
